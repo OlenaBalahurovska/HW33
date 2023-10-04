@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperMath Example</title>
+</head>
+<body>
+    <script>
+        // Task 1
+        class Human {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+
+            displayInfo() {
+                console.log(`Ім'я: ${this.name}, Вік: ${this.age}`);
+            }
+        }
+
+        // Task 2
+        class Car {
+            constructor(brand, model, year, licensePlate) {
+                this.brand = brand;
+                this.model = model;
+                this.year = year;
+                this.licensePlate = licensePlate;
+                this.owner = null;
+            }
+
+            assignOwner(owner) {
+                if (owner.age >= 18) {
+                    this.owner = owner;
+                } else {
+                    console.log(`Власник автомобіля повинен бути старше 18 років.`);
+                }
+            }
+
+            displayInfo() {
+                console.log(`Марка: ${this.brand}, Модель: ${this.model}, Рік: ${this.year}, Номерний знак: ${this.licensePlate}`);
+                if (this.owner) {
+                    console.log(`Власник автомобіля:`);
+                    this.owner.displayInfo();
+                } else {
+                    console.log(`Автомобіль не має власника.`);
+                }
+            }
+        }
+
+        // Task 3: Клас для HTML елементу вводу
+        class HTMLElementInput extends HTMLElement {
+            constructor(tagName, inputType) {
+                super(tagName);
+                this.inputType = inputType;
+                this.value = "";
+            }
+
+            // Метод для встановлення значення поля вводу
+            setValue(value) {
+                this.value = value;
+                console.log(`Значення поля вводу <${this.tagName}> встановлено на "${this.value}".`);
+            }
+
+            // Перевизначення методу render для HTMLElementInput
+            render() {
+                console.log(`<${this.tagName} type="${this.inputType}"> поле вводу відображене зі значенням "${this.value}".`);
+            }
+        }
+
+        // Створення екземпляра класу HTMLElementInput
+        const inputElement = new HTMLElementInput("input", "text");
+
+        // Виклик методів для відображення та повороту
+        inputElement.render();
+        inputElement.rotate(45); // Метод rotate успадкований від HTMLElement
+
+        // Встановлення значення поля вводу та повторне відображення
+        inputElement.setValue("Hello, World!");
+        inputElement.render();
+
+        const person1 = new Human("Олена", 19);
+        const person2 = new Human("Владлена", 20);
+        const person3 = new Human("Еліна", 21);
+
+        const car1 = new Car("Lamborghini", "Urus", 2023, "AХ111UA");
+        const car2 = new Car("Toyota", "Camry", 2020, "ХА111UA");
+
+        car1.assignOwner(person1);
+        car2.assignOwner(person3);
+
+        console.log("Інформація про автомобіль 1:");
+        car1.displayInfo();
+
+        console.log("Інформація про автомобіль 2:");
+        car2.displayInfo();
+    </script>
+</body>
+</html>
+
